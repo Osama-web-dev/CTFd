@@ -92,6 +92,58 @@
   #scoreboard .table tbody tr:first-child {
     animation: gold-shimmer 3s ease-in-out infinite;
   }
+
+  /* ─── CROWNS & MEDALS ─── */
+  .crown-icon {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 1.25rem;
+    animation: crown-float 3s ease-in-out infinite;
+    font-family: "Font Awesome 5 Free" !important;
+    font-weight: 900 !important;
+  }
+
+  .crown-gold {
+    color: #ffd700;
+    text-shadow: 0 0 10px #ffd700, 0 0 20px #c4a962;
+  }
+
+  .crown-silver {
+    color: #d8d8d8;
+    text-shadow: 0 0 8px #d8d8d8, 0 0 15px #a0a0a0;
+  }
+
+  .crown-bronze {
+    color: #cd7f32;
+    text-shadow: 0 0 8px #cd7f32, 0 0 15px #8b4513;
+  }
+
+  @keyframes crown-float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-4px) scale(1.1);
+    }
+  }
+
+  /* ─── ENHANCED GRAPH STYLING ─── */
+  #score-graph {
+    background: linear-gradient(180deg, rgba(26, 20, 16, 0.9) 0%, rgba(14, 12, 10, 0.95) 100%) !important;
+    border: 2px solid rgba(196, 169, 98, 0.4) !important;
+    box-shadow: 0 0 25px rgba(196, 169, 98, 0.15), inset 0 0 20px rgba(0, 0, 0, 0.8) !important;
+    border-radius: 6px !important;
+    padding: 15px !important;
+    margin-bottom: 2rem !important;
+  }
+
+  #score-graph canvas {
+    /* Adds a retro neon blur to the chart lines */
+    filter: drop-shadow(0px 0px 6px rgba(196, 169, 98, 0.6)) contrast(1.1) saturate(1.2);
+  }
 </style>
 
 <div class="jumbotron">
@@ -146,7 +198,16 @@
                 <tr>
                   <th scope="row" class="text-center" x-text="index + 1"></th>
                   <td class="text-start">
-                    <a :href="standing.account_url" x-text="standing.name"></a>
+                    <template x-if="index === 0">
+                      <i class="fas fa-crown crown-icon crown-gold" title="1st Place"></i>
+                    </template>
+                    <template x-if="index === 1">
+                      <i class="fas fa-crown crown-icon crown-silver" title="2nd Place"></i>
+                    </template>
+                    <template x-if="index === 2">
+                      <i class="fas fa-crown crown-icon crown-bronze" title="3rd Place"></i>
+                    </template>
+                    <a :href="standing.account_url" x-text="standing.name" class="fs-5 pb-1"></a>
                     <template x-if="standing.bracket_name">
                       <span class="badge bg-secondary ms-2" x-text="standing.bracket_name"></span>
                     </template>

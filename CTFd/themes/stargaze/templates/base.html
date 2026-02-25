@@ -191,9 +191,9 @@
       z-index: 1055 !important;
     }
 
-    .modal-backdrop {
+    /* .modal-backdrop {
       z-index: 1050 !important;
-    }
+    } */
 
     /* Score graph above all overlay layers */
     #score-graph {
@@ -928,6 +928,16 @@
 
     .modal.fade {
       padding-top: 0 !important;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    /* Remove the overlaying modal backdrop to prevent blocking clicks */
+    .modal-backdrop.fade.show {
+      display: none !important;
+    }
+
+    .modal-backdrop {
+      display: none !important;
     }
   </style>
   {% endblock %}
